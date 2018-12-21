@@ -9,7 +9,7 @@ from .ransac_Main import RANSAC
 
 import numpy as np
 
-
+#Don't change anything here, scroll down to the function
 class CylinderModel():
     def __init__(self, tuple_theta_phi, tuple_radius_minmax):
         self.minradius = tuple_radius_minmax[0]
@@ -76,12 +76,13 @@ class CylinderModel():
 a list of 3d points for the existence of cylinders up to a passed number. Points
 input should be an array of 3d coordinates, ideally ground removed
 """
+#Specify parameters here
 def cylinderSearch(nr, points):
     models = []
     cyl_points = []
     for i in range(nr):
-        MyRANSAC = RANSAC(points, 5000, 0.01, 200)
-        MyRANSAC.Model = CylinderModel((0,0), (0.05, 0.3))                      #Theta and Phi, Min Max radius
+        MyRANSAC = RANSAC(points, 5000, 0.01, 200)                              # the nr of iterations, the distance treshold for inliers, the minimum nr of points for an object
+        MyRANSAC.Model = CylinderModel((0,0), (0.05, 0.3))                      #Theta and Phi, Min Max radius of the cylinders
         result = MyRANSAC.run()
         if result is not None:
             models.append(result[2])
