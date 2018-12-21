@@ -1,2 +1,2 @@
-from RANSAC import CylRANSAC
+from RANSAC import RANSAC
 from Runner import cylinderSearch
