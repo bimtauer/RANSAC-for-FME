@@ -3,6 +3,7 @@ import numpy as np
 class CylinderModel():
     def __init__(self, tuple_theta_phi, tuple_radius_minmax):
         self.n = 2
+        self.name = 'cylinder'
         self.minradius = tuple_radius_minmax[0]
         self.maxradius = tuple_radius_minmax[1]
         self.dir = self.direction(tuple_theta_phi[0], tuple_theta_phi[1])
@@ -67,6 +68,7 @@ class CylinderModel():
 class PlaneModel():
     def __init__(self):
         self.n = 1
+        self.name = 'plane'
         pass
     
     def fit(self, S, N):

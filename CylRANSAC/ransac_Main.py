@@ -25,11 +25,14 @@ class RANSAC:
         return np.asarray(pcd.normals)
 
     def sample(self):
-        n = self.Model.n                                               #TODO: Update depending on geomtry
+        try:
+            n = self.Model.n
+        except AttributeError:
+            raise AttributeError("It looks like you have not specified a shape to search for.")
+           
         all_indices = np.arange(self.P.shape[0])
         np.random.shuffle(all_indices)
         self.indices_S = all_indices[:n]
-        self.indices_R = all_indices[n:] #TODO: Remove
         return
 
     def run(self):
@@ -52,8 +55,8 @@ class RANSAC:
                         success = True
             k += 1
         if success:
-            print('Found one cylinder')
+            print('Found a {}'.format(self.Model.name))
             return [inliers, outliers, model]
         else:
-            print('Could not find a cylinder')
+            print('Could not find a {}'.format(self.Model.name))
             return None
