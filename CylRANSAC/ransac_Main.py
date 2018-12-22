@@ -25,7 +25,7 @@ class RANSAC:
         return np.asarray(pcd.normals)
 
     def sample(self):
-        n = 2
+        n = self.Model.n                                               #TODO: Update depending on geomtry
         all_indices = np.arange(self.P.shape[0])
         np.random.shuffle(all_indices)
         self.indices_S = all_indices[:n]

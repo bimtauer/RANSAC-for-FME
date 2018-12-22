@@ -2,6 +2,7 @@ import numpy as np
 
 class CylinderModel():
     def __init__(self, tuple_theta_phi, tuple_radius_minmax):
+        self.n = 2
         self.minradius = tuple_radius_minmax[0]
         self.maxradius = tuple_radius_minmax[1]
         self.dir = self.direction(tuple_theta_phi[0], tuple_theta_phi[1])
@@ -55,8 +56,29 @@ class CylinderModel():
         # Distances to axis:
         distances = np.sqrt(twod[:,0]**2+twod[:,1]**2)
         # Distance within radius + threshold
-        inlier_indices = np.where(distances <= model[1] + t)[0]
-        outlier_indices = np.where(distances > model[1] + t)[0]
+        inlier_indices = np.where((distances <= model[1] + t) & (distances >= model[1] - t))[0]
+        outlier_indices = np.where((distances > model[1] + t) | (distances < model[1] - t))[0]
+        if len(inlier_indices) > min_sample:
+            return [inlier_indices, outlier_indices]
+        else:
+            return None
+
+
+class PlaneModel():
+    def __init__(self):
+        self.n = 1
+        pass
+    
+    def fit(self, S, N):
+        #N is the normal vector of our plane model, S is a point on it
+        
+        return [S, N]
+    
+    def evaluate(self, model, R, t, min_sample):
+        #Essentially I could just drop every dimension except the plane normal vectors one.
+        distances = np.dot((R - model[0]), model[1].T)
+        inlier_indices = np.where((distances <= t) & (distances >= -t))[0]
+        outlier_indices = np.where((distances > t) | (distances < -t))[0]
         if len(inlier_indices) > min_sample:
             return [inlier_indices, outlier_indices]
         else:
