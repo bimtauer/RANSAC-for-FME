@@ -72,8 +72,7 @@ class PlaneModel():
         pass
     
     def fit(self, S, N):
-        #N is the normal vector of our plane model, S is a point on it
-        
+        #N is the normal vector of our plane model, S is a point on it, no fitting needed
         return [S, N]
     
     def evaluate(self, model, R, t, min_sample):
