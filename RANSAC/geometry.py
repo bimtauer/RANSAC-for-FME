@@ -70,13 +70,12 @@ class PlaneModel():
         self.n = 1
         self.name = 'plane'
         pass
-    
+
     def fit(self, S, N):
         #N is the normal vector of our plane model, S is a point on it, no fitting needed
-        N = N.flatten()
-        N = N/np.sqrt(N.dot(N))
+        N = N/np.sqrt(N.ravel().dot(N.ravel()))
         return [S, N]
-    
+
     def evaluate(self, model, R, t, min_sample):
         #Essentially I could just drop every dimension except the plane normal vectors one.
         distances = np.dot((R - model[0]), model[1].T)
