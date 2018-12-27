@@ -2,7 +2,7 @@ import fme
 import fmeobjects
 import numpy as np
 import sys
-sys.path.insert(0,r'\\intra.malmo.se\dfs\gemensamt\Projekt\lidar-data (josbir)\FME\Object Recognition\Git\object_recognition')
+sys.path.insert(0,r'PATH_TO_PARENT_DIRECTORY')
 from CylRANSAC import Runner                                                    #TODO: Fix this ugly mess
 
 
