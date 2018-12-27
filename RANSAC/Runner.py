@@ -17,7 +17,7 @@ def Search(nr, points, model):
     models = []
     cyl_points = []
     for i in range(nr):
-        MyRANSAC = RANSAC(points, 10000, 0.05, 3000)                              # the nr of iterations, the distance treshold for inliers, the minimum nr of points for an object
+        MyRANSAC = RANSAC(points, 10000, 3000)                              # the nr of iterations, the distance treshold for inliers, the minimum nr of points for an object
         MyRANSAC.Model = model
         result = MyRANSAC.run()
         if result is not None:

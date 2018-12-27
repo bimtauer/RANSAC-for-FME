@@ -19,7 +19,7 @@ class FeatureProcessor(object):
         #self.pyoutput(feature)
     def close(self):
         array = np.array(self.points)
-        models, cyl_points, remaining = Search(1, array, CylinderModel((0,0),(0.05,0.1)))
+        models, cyl_points, remaining = Search(1, array, CylinderModel(0.05, (0.02,0.05), (0,0)))
         if len(cyl_points) > 0:
             for point in cyl_points[0]:
                 feature = fmeobjects.FMEFeature()

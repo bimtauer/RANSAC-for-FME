@@ -9,10 +9,9 @@ from open3d import PointCloud, Vector3dVector, estimate_normals, KDTreeSearchPar
 
 
 class RANSAC:
-    def __init__(self, points, nr_of_iterations, distance_threshold, min_sample_threshold):
+    def __init__(self, points, nr_of_iterations, min_sample_threshold):
         self.P = points
         self.iterations = nr_of_iterations
-        self.t = distance_threshold
         self.min_sample = min_sample_threshold
         self.normals = self.estimateNormals(points)
         self.Model = ""
@@ -29,7 +28,7 @@ class RANSAC:
             n = self.Model.n
         except AttributeError:
             raise AttributeError("It looks like you have not specified a shape to search for.")
-           
+
         all_indices = np.arange(self.P.shape[0])
         np.random.shuffle(all_indices)
         self.indices_S = all_indices[:n]
@@ -45,7 +44,7 @@ class RANSAC:
             N = self.normals[self.indices_S,:]
             current_model = self.Model.fit(S, N)
             if current_model is not None:
-                indices = self.Model.evaluate(current_model, self.P, self.t, self.min_sample)
+                indices = self.Model.evaluate(current_model, self.P, self.min_sample)
                 if indices is not None:
                     if len(indices[0]) > nr_inliers:
                         nr_inliers = len(indices[0])

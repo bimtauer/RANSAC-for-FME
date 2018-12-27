@@ -14,9 +14,9 @@ points = np.loadtxt(r'../Data/pole2.txt', skiprows=1, delimiter = ';')[:,:3]
 from Runner import Search
 from geometry import *
 
-Result = Search(1, points, CylinderModel((0,0), (0.05, 0.1)))
+Result = Search(1, points, CylinderModel(0.05, (0.02,0.05), (0,0)))
 
-Result = Search(1, points, PlaneModel())
+Result = Search(1, points, PlaneModel(0.05))
 
 resultPoints = Result[1][0]
 #resultPoints = np.vstack((Result[1][0], Result[1][1]))
